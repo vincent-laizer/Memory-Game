@@ -15,7 +15,9 @@ const stars = [],
     threeStars = [];
 let movesCounter = document.getElementById("moves");
 let starsContainer = document.getElementById("starsContainer");
-
+let timerContainer = document.getElementById("timerContainer");
+var seconds = 0;
+let timeHandler;
 
 function load() {
     backgroundSound.loop = true;
@@ -185,6 +187,7 @@ function viewIcons() {
 function newGame() {
 
     starsContainer.style.display = "flex";
+    timerContainer.style.display = "flex";
 
     for (let j = 0; j < gameCard.length; j++) {
         gameCard[j].removeAttribute("disabled");
@@ -198,7 +201,26 @@ function newGame() {
     viewIcons();
     window.setTimeout(start, 7000);
 
+    startTimer();
+    seconds = 0; //reset seconds every time the game starts
+    timeHandler = setInterval(startTimer, 1000);
 
+}
+
+function pad(data){
+    string_data = ""+data+"";
+    if(string_data.length < 2){
+        string_data = "0"+string_data;
+    }
+    return string_data;
+}
+
+function startTimer(){
+    var mins = parseInt(seconds/60);
+    var secs = seconds%60;
+
+    timerContainer.innerText = pad(mins) + ":" + pad(secs);
+    seconds++;   
 }
 
 
@@ -252,7 +274,6 @@ function match() {
         history.length = 0;
     }
 
-
 }
 
 function show(id) {
@@ -271,6 +292,10 @@ function show(id) {
 
         winGame.loop = false;
         winGame.play();
+        
+        //Stop the timer
+        clearInterval(timeHandler);
+
         if (count < 18) {
             window.setTimeout(singleStar, 2000);
             window.setTimeout(doubleStars, 3000);
