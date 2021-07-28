@@ -184,6 +184,8 @@ function viewIcons() {
 
 function newGame() {
 
+    starsContainer.style.display = "flex";
+
     for (let j = 0; j < gameCard.length; j++) {
         gameCard[j].removeAttribute("disabled");
     }

@@ -146,7 +146,7 @@ span {
     width: 180px;
     color: yellow;
     margin-top: 30px;
-    display: flex;
+    display: none;
     justify-content: space-around;
     margin-left: 25%;
     border-radius: 5px;
